@@ -8,13 +8,13 @@ const Navbar = () => {
       </h1>
       <div>
         <Link href="/simulation">
-          <a className="mx-2 hover:underline">Simulations</a>
+          Simulations
         </Link>
         <Link href="/dashboard">
-          <a className="mx-2 hover:underline">Dashboard</a>
+          Dashboard
         </Link>
         <Link href="/login">
-          <a className="mx-2 hover:underline">Login</a>
+        Login
         </Link>
       </div>
     </nav>

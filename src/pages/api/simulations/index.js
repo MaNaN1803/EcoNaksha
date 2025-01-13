@@ -13,7 +13,20 @@ export default async function handler(req, res) {
 
   try {
     const response = await queryGemini(prompt);
-    res.status(200).json({ result: JSON.parse(response) });
+
+    // Validate if the response is valid JSON
+    let result;
+    try {
+      result = JSON.parse(response);
+    } catch (parseError) {
+      console.error("Invalid JSON Response:", response);
+      return res.status(500).json({
+        message: "The response from Gemini API is not valid JSON.",
+        rawResponse: response,
+      });
+    }
+
+    res.status(200).json({ result });
   } catch (error) {
     console.error("API Error:", error);
     res.status(500).json({ message: "Simulation failed", error: error.message });

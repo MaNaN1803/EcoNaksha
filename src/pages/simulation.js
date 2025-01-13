@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SimulationForm from "@/components/SimulationForm";
+import Visualization from "@/components/Visualization";
 
 export default function Simulation() {
   const [simulationResult, setSimulationResult] = useState(null);
@@ -38,6 +39,19 @@ export default function Simulation() {
             <pre className="bg-gray-100 p-4 mt-4 rounded overflow-auto">
               {JSON.stringify(simulationResult, null, 2)}
             </pre>
+            <div>
+    <SimulationResults data={simulationResult} />
+    <Visualization
+      trafficData={{
+        privateVehicles: simulationResult.traffic_analysis.private_vehicle_usage_percentage,
+        publicTransport: simulationResult.traffic_analysis.public_transport_usage_percentage,
+      }}
+      pollutionData={{
+        industrial: simulationResult.pollution_analysis.industrial_emission_percentage,
+        vehicles: simulationResult.pollution_analysis.daily_vehicle_emissions_co2_units,
+      }}
+    />
+  </div>
           </div>
         )}
       </main>
